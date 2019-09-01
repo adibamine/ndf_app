@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select'
@@ -11,6 +10,8 @@ import {
   MuiPickersUtilsProvider,
   DatePicker
 } from '@material-ui/pickers';
+  
+import { renderTextField, renderDateField, renderSelectField } from 'components/Fields';
 
   function getModalStyle() {
     const top = 50;
@@ -39,61 +40,6 @@ import {
       marginTop: '10px',
     }
   }));
-
-  const renderTextField = ({
-    label,
-    input,
-    ...custom
-  }) => (
-    <TextField
-      label={label}
-      placeholder={label}
-      {...input}
-      {...custom}
-    />
-  )
-
-  const renderSelectField = ({
-    input,
-    label,
-    children,
-    ...custom
-  }) => (
-    <FormControl>
-      <InputLabel htmlFor="age-native-simple">Payment Method</InputLabel>
-      <Select
-        native
-        {...input}
-        {...custom}
-        inputProps={{
-          name: 'paymentMethod',
-          id: 'age-native-simple'
-        }}
-      >
-        {children}
-      </Select>
-    </FormControl>
-  )
-
-export const renderDateField = props => {
-  const {
-  label,
-  input: { onChange, value },
-  } = props;
-    return (
-      <div>
-        <DatePicker
-          label={label}
-          margin="normal"
-          value={value}
-          onChange={onChange}
-          format="dd/MM/yyyy"
-          error={false}
-          helperText={null}
-        />
-      </div>
-    );
-  };
 
 function ExpenseFormCmp({ handleSubmit, closeModal }) {
     const classes = useStyles();

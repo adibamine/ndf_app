@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
 
 export function ExpensesListCmp({expenses, addExpense, openModal, closeModal, isModalOpen}) {
   const classes = useStyles();
-
   return (
     <React.Fragment>
       <Title>Recent Expenses</Title>

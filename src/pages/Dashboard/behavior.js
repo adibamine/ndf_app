@@ -35,7 +35,7 @@ export function openModal() {
 }
 
 export function addExpense(expense) {
-    const newExpense = createData(expense.id, expense.date, expense.name, expense.description, expense.paymentMethod, expense.amount)
+    const newExpense = createData(expense.date, expense.name, expense.description, expense.paymentMethod, expense.amount)
     return (dispatch) => {
         dispatch({ type: ADD_EXPENSE, payload: newExpense })
     }
