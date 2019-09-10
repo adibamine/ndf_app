@@ -8,10 +8,9 @@ function createData(date, amount) {
   return { date, amount };
 }
 
-const data = [];
 
 export function ChartCmp({ expensesList }) {
-
+  const data = [];
   expensesList.forEach(element => {
     const formattedDate = format(element.date, 'dd/MM/yyyy');
     var found = data.find(elem => elem.date === formattedDate);
