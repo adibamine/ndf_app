@@ -35,7 +35,7 @@ export default function ChartCmp({ expenses }) {
           <XAxis dataKey="date" />
           <YAxis>
             <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
-              Sales ($)
+              Expenses Nb
             </Label>
           </YAxis>
           <Line type="monotone" dataKey="amount" stroke="#556CD6" dot={false} />

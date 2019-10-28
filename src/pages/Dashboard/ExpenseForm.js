@@ -17,7 +17,7 @@ export default class ExpenseFormCmp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: undefined,
+      date: new Date(),
       name: '',
       description: '',
       paymentMethod: '',
@@ -84,8 +84,8 @@ export default class ExpenseFormCmp extends React.Component {
             value={this.state.description}
             onChange={this.handleDescriptionChange}
           />
-          <FormControl style={{ width: '182px', marginTop: '-15px' }}>
-            <InputLabel htmlFor="payment-helper">Paiement</InputLabel>
+          <FormControl style={{ width: '182px', marginTop: '-16px' }}>
+            <InputLabel htmlFor="payment-helper">Paiement Method</InputLabel>
 
             <Select
               name="paymentMethod"
