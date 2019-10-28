@@ -8,11 +8,13 @@ import {
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select'
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 
 export default class ExpenseFormCmp extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       date: undefined,
@@ -31,26 +33,26 @@ export default class ExpenseFormCmp extends React.Component {
   }
 
   handleDateChange(value) {
-    this.setState({date: value});
+    this.setState({ date: value });
   }
 
   handleNameChange(event) {
-    this.setState({name: event.target.value});
+    this.setState({ name: event.target.value });
   }
 
 
   handleDescriptionChange(event) {
-    this.setState({description: event.target.value});
+    this.setState({ description: event.target.value });
   }
 
 
   handlePmChange(event) {
-    this.setState({paymentMethod: event.target.value});
+    this.setState({ paymentMethod: event.target.value });
   }
 
 
   handleAmountChange(event) {
-    this.setState({amount: event.target.value});
+    this.setState({ amount: event.target.value });
   }
 
   handleSubmit(event) {
@@ -58,44 +60,50 @@ export default class ExpenseFormCmp extends React.Component {
   }
 
   render() {
-    const classes = {marginTop: '10px', display: 'flex',  justifyContent:'center'}
+    const classes = { marginTop: '30px', display: 'flex', justifyContent: 'center' }
     return (
       <div style={classes}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DatePicker
-          format="dd/MM/yyyy"
-          name="date"
-          onChange={this.handleDateChange}
-          value={this.state.date}
-        />
-        </MuiPickersUtilsProvider>
-        <Input
-          placeholder="Name"
-          name="name"
-          value={this.state.name}
-          onChange={this.handleNameChange}
-        />
-        <Input
-          placeholder="Description"
-          name="description"
-          value={this.state.description}
-          onChange={this.handleDescriptionChange}
-        />
-        <Select
-          name="paymentMethod"
-          value={this.state.paymentMethod}
-          onChange={this.handlePmChange}
-      >
-          <MenuItem value="Cash">Cash</MenuItem>
-          <MenuItem value="Carte">Carte</MenuItem>
-          <MenuItem value="Cheque">Chèque</MenuItem>
-      </Select>
-        <Input
-          placeholder="Amount"
-          name="amount"
-          value={this.state.amount}
-          onChange={this.handleAmountChange}
-        />
+        <div>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DatePicker
+              format="dd/MM/yyyy"
+              name="date"
+              onChange={this.handleDateChange}
+              value={this.state.date}
+            />
+          </MuiPickersUtilsProvider>
+          <Input
+            placeholder="Name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleNameChange}
+          />
+          <Input
+            placeholder="Description"
+            name="description"
+            value={this.state.description}
+            onChange={this.handleDescriptionChange}
+          />
+          <FormControl style={{ width: '182px', marginTop: '-15px' }}>
+            <InputLabel htmlFor="payment-helper">Paiement</InputLabel>
+
+            <Select
+              name="paymentMethod"
+              value={this.state.paymentMethod}
+              onChange={this.handlePmChange}
+            >
+              <MenuItem value="Cash">Cash</MenuItem>
+              <MenuItem value="Carte">Carte</MenuItem>
+              <MenuItem value="Cheque">Chèque</MenuItem>
+            </Select>
+          </FormControl>
+          <Input
+            placeholder="Amount"
+            name="amount"
+            value={this.state.amount}
+            onChange={this.handleAmountChange}
+          />
+        </div>
         <Button variant="contained" color="primary" onClick={this.handleSubmit}>
           Add
       </Button>
