@@ -7,18 +7,17 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import useStyles from './styles';
+import classes from './AppHeader.module.css';
 
 export default function () {
-  const classes = useStyles();
   return (
-    <AppBar position="absolute" className={clsx(classes.appBar, classes.appBarShift)}>
+    <AppBar position="absolute" className={[classes.appBar, classes.appBarShift].join(' ')}>
       <Toolbar className={classes.toolbar}>
         <IconButton
           edge="start"
           color="inherit"
           aria-label="open drawer"
-          className={clsx(classes.menuButton, classes.menuButtonHidden)}
+          className={[classes.menuButton, classes.menuButtonHidden].join(' ')}
         >
           <MenuIcon />
         </IconButton>

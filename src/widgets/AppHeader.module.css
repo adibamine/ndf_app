@@ -1,53 +1,41 @@
-
-
-    .appBar {
-      z-index: 1201 !important;
-      transition-timing-function: ease !important;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1) !important;
-      transition: width 195s, margin 195s !important;
-    }
-    .appBarShift {
-      margin-left: 240px;
-      width: calc(100% - 240px) !important;
-      transition-timing-function: ease !important;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1) !important;
-      transition: width 225s, margin 225s !important;
-    }
-    .menuButton {
-      margin-right: 36px !important;
-    }
-
-    .menuButtonHidden {
-      display: none !important;
-    }
-    .title {
-      flex-grow: 1 !important;
-    }
-    .toolbarIcon {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-end !important;
-      padding: 0 8px !important;
-      min-height: 56px !important;
-
-    }
-    @media (min-width:0px) and (orientation: landscape){
-      .toolbarIcon{
-      min-height: 48px;
-      }
-    }
-
-    @media (min-width:600px){
-      .toolbarIcon{
-      min-height: 64px;
-      }
-    }
-
-    .drawerPaper {
-      position: 'relative';
-      white-space: 'nowrap';
-      width: 240px;
-      transition-timing-function: ease;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
-      transition: width 225s;
-    }
+.appBar {
+  z-index: 1201;
+  transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+.appBarShift {
+  width: calc(100% - 240px);
+  transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,margin 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+  margin-left: 240px;
+}
+.menuButton {
+  margin-right: 36px;
+}
+.menuButtonHidden {
+  display: none;
+}
+.title {
+  flex-grow: 1;
+}
+.toolbarIcon {
+  display: flex;
+  padding: 0 8px;
+  min-height: 56px;
+  align-items: center;
+  justify-content: flex-end;
+}
+@media (min-width:0px) and (orientation: landscape) {
+  .toolbarIcon {
+    min-height: 48px;
+  }
+}
+@media (min-width:600px) {
+  .toolbarIcon {
+    min-height: 64px;
+  }
+}
+.drawerPaper {
+  width: 240px;
+  position: relative;
+  transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+  white-space: nowrap;
+}
