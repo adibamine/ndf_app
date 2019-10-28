@@ -5,7 +5,6 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
-import { connect } from 'react-redux';
 import format from 'date-fns/format';
 
 const useStyles = makeStyles({
@@ -14,7 +13,8 @@ const useStyles = makeStyles({
   },
 });
 
-export function DepositsCmp({ total }) {
+export default function DepositsCmp({ expenses }) {
+  const total = expenses.reduce((a, b) => +a + +b.amount, 0);
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -34,10 +34,3 @@ export function DepositsCmp({ total }) {
   );
 }
 
-export function mapStateToProps(state) {
-  return {
-    total: state.dashboard.expensesList.reduce((a, b) => +a + +b.amount, 0),
-  }
-}
-
-export default connect(mapStateToProps)(DepositsCmp);

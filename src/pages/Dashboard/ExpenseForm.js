@@ -1,86 +1,105 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form'
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
+import Input from '@material-ui/core/Input';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   DatePicker
 } from '@material-ui/pickers';
-  
-import { renderTextField, renderDateField, renderSelectField } from 'components/Fields';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select'
 
-  function getModalStyle() {
-    const top = 50;
-    const left = 50;
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
-  
-  const useStyles = makeStyles(theme => ({
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-    form: {
-      textAlign: 'center',
-    },
-    button: {
-      marginTop: '10px',
+
+export default class ExpenseFormCmp extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      date: undefined,
+      name: '',
+      description: '',
+      paymentMethod: '',
+      amount: ''
     }
-  }));
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handlePmChange = this.handlePmChange.bind(this);
+    this.handleAmountChange = this.handleAmountChange.bind(this);
 
-function ExpenseFormCmp({ handleSubmit, closeModal }) {
-    const classes = useStyles();
-    // getModalStyle is not a pure function, we roll the style only on the first render
-    const [modalStyle] = React.useState(getModalStyle);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
+  handleDateChange(value) {
+    this.setState({date: value});
+  }
+
+  handleNameChange(event) {
+    this.setState({name: event.target.value});
+  }
+
+
+  handleDescriptionChange(event) {
+    this.setState({description: event.target.value});
+  }
+
+
+  handlePmChange(event) {
+    this.setState({paymentMethod: event.target.value});
+  }
+
+
+  handleAmountChange(event) {
+    this.setState({amount: event.target.value});
+  }
+
+  handleSubmit(event) {
+    this.props.addExpense(this.state)
+  }
+
+  render() {
+    const classes = {marginTop: '10px', display: 'flex',  justifyContent:'center'}
     return (
-        <div style={modalStyle} className={classes.paper}>
-            <h2 id="simple-modal-title">New Expense</h2>
-            <div className={classes.form}>
-              <form onSubmit={handleSubmit}>
-                <FormControl>
-                  <Field name="name" component ={renderTextField} label="Name" />
-                  <Field name="description" component={renderTextField} label="Description"/>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Field name="date" component={renderDateField} label="Date"/>
-                  </MuiPickersUtilsProvider>
-                  <Field
-                    name="paymentMethod"
-                    component={renderSelectField}
-                    label="Payment Method"
-                  >
-                    <option value="" />
-                    <option value={'Cash'}>Cash</option>
-                    <option value={'Carte'}>Carte</option>
-                    <option value={'Cheque'}>Chèque</option>
-                  </Field>
-                  <Field name="amount" component={renderTextField} label="Amount" />
-                  <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                      Add
-                  </Button>
-                  <Button onClick={closeModal} variant="contained" color="secondary" className={classes.button}>
-                      Cancel
-                  </Button>
-                </FormControl>
-              </form>
-            </div>
+      <div style={classes}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <DatePicker
+          format="dd/MM/yyyy"
+          name="date"
+          onChange={this.handleDateChange}
+          value={this.state.date}
+        />
+        </MuiPickersUtilsProvider>
+        <Input
+          placeholder="Name"
+          name="name"
+          value={this.state.name}
+          onChange={this.handleNameChange}
+        />
+        <Input
+          placeholder="Description"
+          name="description"
+          value={this.state.description}
+          onChange={this.handleDescriptionChange}
+        />
+        <Select
+          name="paymentMethod"
+          value={this.state.paymentMethod}
+          onChange={this.handlePmChange}
+      >
+          <MenuItem value="Cash">Cash</MenuItem>
+          <MenuItem value="Carte">Carte</MenuItem>
+          <MenuItem value="Cheque">Chèque</MenuItem>
+      </Select>
+        <Input
+          placeholder="Amount"
+          name="amount"
+          value={this.state.amount}
+          onChange={this.handleAmountChange}
+        />
+        <Button variant="contained" color="primary" onClick={this.handleSubmit}>
+          Add
+      </Button>
       </div>
     );
+  }
 }
-
-export default reduxForm({
-  form: 'ExpenseForm',
-})(ExpenseFormCmp)

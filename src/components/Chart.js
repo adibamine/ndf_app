@@ -1,7 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
-import { connect } from 'react-redux';
 import format from 'date-fns/format';
 
 function createData(date, amount) {
@@ -9,9 +8,9 @@ function createData(date, amount) {
 }
 
 
-export function ChartCmp({ expensesList }) {
+export default function ChartCmp({ expenses }) {
   const data = [];
-  expensesList.forEach(element => {
+  expenses.forEach(element => {
     const formattedDate = format(element.date, 'dd/MM/yyyy');
     var found = data.find(elem => elem.date === formattedDate);
     if(found) {
@@ -45,11 +44,3 @@ export function ChartCmp({ expensesList }) {
     </React.Fragment>
   );
 }
-
-export function mapStateToProps(state) {
-  return {
-    expensesList: state.dashboard.expensesList,
-  }
-}
-
-export default connect(mapStateToProps)(ChartCmp);
