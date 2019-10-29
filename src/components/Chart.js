@@ -10,10 +10,12 @@ function createData(date, amount) {
 
 export default function ChartCmp({ expenses }) {
   const data = [];
+  console.log("element?daa ", expenses)
+
   expenses.forEach(element => {
     const formattedDate = format(element.date, 'dd/MM/yyyy');
     var found = data.find(elem => elem.date === formattedDate);
-    if(found) {
+    if (found) {
       found.amount += 1;
     } else {
       data.push(createData(formattedDate, 1));

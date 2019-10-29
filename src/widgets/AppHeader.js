@@ -39,7 +39,7 @@ export function AppHeader(props) {
 
 function mapStateToProps(state) {
   return {
-    count: state.notificationCount
+    count: state.notifications.notificationCount
   }
 }
 
